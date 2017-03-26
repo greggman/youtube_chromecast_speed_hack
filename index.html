@@ -88,9 +88,15 @@ function getYoutubeEmbedUrl(url) {
     } else if (params.list) {
       url = "https://www.youtube.com/embed/videoseries";
     }
-    url += makeSearchUrl(params);
+    url += makeSearchUrl(params) + getHash(url);
   }
   return url;
+}
+
+function getHash(url) {
+  const a = document.createElement('a');
+  a.href = url;
+  return a.hash;
 }
 
 function makeSearchUrl(params) {
