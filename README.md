@@ -5,6 +5,8 @@ A way to play a youtube video on Chromecast with settable speed
 
 All this does is provide a form and display the video in an iframe. As of March 26th 2017 you can then follow these steps
 
+![example](example.gif)
+
 1. chromecast [the page](https://greggman.github.io/youtube_chromecast_speed_hack/)
 2. enter a youtube url 
 3. set the playback speed
