@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+  <title>Youtube Chromecast Speed Hack</title>
+  <style>
+  body {
+    margin: 0;
+  }
+  #frame {
+    display: flex;
+  }
+  input {
+    flex: 1 1 auto;
+    display: block;
+    width: 100vw;
+  }
+  iframe {
+    flex: 1 1 auto;
+    display: block;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom 0;
+  }
+  </style>
+</head>
+<body>
+  <div id="frame">
+    <input type="text" id="url" placeholder="..paste Youtube URL here..." />
+    <iframe frameborder="0" allowfullscreen></iframe>
+  </div>
+</body>
+<script>
+const $ = document.querySelector.bind(document);
+$("input").addEventListener('change', (e) => {
+  $("iframe").src = $("url").value;
+});
+</script>
+</html>
