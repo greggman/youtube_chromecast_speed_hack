@@ -1,38 +1,116 @@
 <html lang="en">
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>Youtube Chromecast Speed Hack</title>
   <style>
+  * {
+    box-sizing: border-box;
+  }
   body {
     margin: 0;
+    background-color: #444;
+    color: white;
+    width: 100vw;
+    height: 100vh;
+    font-family: sans-serif;
   }
   #frame {
     display: flex;
+    padding: 1em;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+  }
+  .ins {
+    flex: 0 0 auto;
   }
   input {
-    flex: 1 1 auto;
+    border: none;
+    flex: 0 0 auto;
     display: block;
-    width: 100vw;
+    width: 100%;
+    height: 2em;
+    font-size: medium;
+    background: #222;
+    color: white;
+    margin-bottom: 1em;
   }
   iframe {
+    background: #666;
     flex: 1 1 auto;
     display: block;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom 0;
   }
   </style>
 </head>
 <body>
   <div id="frame">
+    <div class="ins">
+      <h1>Youtube Chromecast Speed Hack</h1>
+      <ol>
+        <li>
+            Cast this page (click the cast button in the Chrome Toolbar)
+        </li>
+        <li>
+            Copy and paste a youtube URL below
+        </li>
+        <li>
+            Play the video, set the playback speed
+        </li>
+        <li>
+            Click the fullscreen icon in the bottom right of the video
+        </li>
+      </ol>
+    </div>
     <input type="text" id="url" placeholder="..paste Youtube URL here..." />
     <iframe frameborder="0" allowfullscreen></iframe>
   </div>
 </body>
 <script>
 const $ = document.querySelector.bind(document);
-$("input").addEventListener('change', (e) => {
-  $("iframe").src = $("url").value;
+const urlElem = $("#url");
+const iframeElem = $("iframe");
+urlElem.addEventListener('change', (e) => {
+  const url = urlElem.value.trim();
+  if (url) {
+    iframeElem.src = getYoutubeEmbedUrl(url);
+  }
 });
+
+function getYoutubeEmbedUrl(url) {
+  url = url.replace('http://', 'https://');
+  if (url.indexOf('embed') < 0) {
+    const params = getParams(url);
+    params.autoplay = 1;
+    if (params.v) {
+      url = "https://www.youtube.com/embed/" + encodeURIComponent(params.v);
+    } else if (params.list) {
+      url = "https://www.youtube.com/embed/videoseries";
+    }
+    url += makeSearchUrl(params);
+  }
+  return url;
+}
+
+function makeSearchUrl(params) {
+  return '?' + Object.keys(params).map(key => {
+    return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
+  }).join('&');
+}
+
+function getParams(url) {
+  const a = document.createElement('a');
+  a.href = url;
+  const params = {};
+  const search = a.search;
+  if (search) {
+    search.substring(1).split("&").forEach(pair => {
+      const keyValue = pair.split('=').map(decodeURIComponent);
+      params[keyValue[0]] = keyValue[1];
+    });
+  }
+  return params;
+}
 </script>
 </html>
