@@ -79,6 +79,11 @@
         </li>
       </ol>
     </div>
+    <p>
+    You can also use
+    <a href='javascript:(function () { (window.location.href = "https://greggman.github.io/youtube_chromecast_speed_hack/?" + window.location.href) }());'>this bookmarklet</a>
+    by bookmarking it and clicking it when you're on a youtube page to quickly apply this speed hack.
+    </p>
     <input type="text" id="url" placeholder="..paste Youtube URL here..." />
     <iframe frameborder="0" allowfullscreen></iframe>
   </div>
@@ -93,6 +98,11 @@ urlElem.addEventListener('change', (e) => {
     iframeElem.src = getYoutubeEmbedUrl(url);
   }
 });
+
+ // This is to make the bookmarklet work.
+ if (window.location.search.substr(1) != "") {
+     iframeElem.src = getYoutubeEmbedUrl(decodeURIComponent(window.location.search.substr(1)));
+ }
 
 function getYoutubeEmbedUrl(url) {
   url = url.replace('http://', 'https://');
