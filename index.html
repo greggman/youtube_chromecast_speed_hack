@@ -108,7 +108,7 @@ function getVideoEmbedUrl(url) {
   url = url.replace('http://', 'https://');
   if (url.indexOf('twitch.tv') > 0) {
     var url2 = ''
-    url2 += 'https://player.twitch.tv/?enableExtensions=true&muted=false&player=popout&video='
+    url2 += 'https://player.twitch.tv/?enableExtensions=true&muted=false&parent=greggman.github.io&player=popout&video='
     url2 +=  url.substr(url.lastIndexOf('/') + 1)
     url = url2
   }
